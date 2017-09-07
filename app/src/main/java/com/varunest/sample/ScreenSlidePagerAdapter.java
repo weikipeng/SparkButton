@@ -106,7 +106,26 @@ public class ScreenSlidePagerAdapter extends PagerAdapter {
         });
     }
 
+    private boolean isPraise = false;
     private void setupHeartLayoutClickEvents(View view) {
+        final SparkButton heartButton = (SparkButton) view.findViewById(R.id.heart_button);
+        heartButton.pressOnTouch(false);
+        heartButton.setOnClickListener(null);
+        heartButton.setClickable(false);
+        heartButton.setFocusable(false);
+
+        View praiseLayout = view.findViewById(R.id.praiseLayout);
+        praiseLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isPraise = !isPraise;
+                if (isPraise) {
+                    heartButton.playAnimation();
+                }
+                heartButton.setChecked(isPraise);
+            }
+        });
+
         view.findViewById(R.id.github_page).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
